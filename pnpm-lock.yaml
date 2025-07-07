@@ -149,6 +149,9 @@ importers:
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      random-word-slugs:
+        specifier: ^0.1.7
+        version: 0.1.7
       react:
         specifier: ^19.0.0
         version: 19.1.0
@@ -207,6 +210,9 @@ importers:
       eslint-config-next:
         specifier: 15.3.4
         version: 15.3.4(eslint@9.30.0(jiti@2.4.2))(typescript@5.8.3)
+      eslint-plugin-react-hooks:
+        specifier: ^5.2.0
+        version: 5.2.0(eslint@9.30.0(jiti@2.4.2))
       prisma:
         specifier: ^6.10.1
         version: 6.10.1(typescript@5.8.3)
@@ -4172,6 +4178,9 @@ packages:
   quick-lru@5.1.1:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
+
+  random-word-slugs@0.1.7:
+    resolution: {integrity: sha512-8cyzxOIDeLFvwSPTgCItMXHGT5ZPkjhuFKUTww06Xg1dNMXuGxIKlARvS7upk6JXIm41ZKXmtlKR1iCRWklKmg==}
 
   range-parser@1.2.1:
     resolution: {integrity: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==}
@@ -9189,6 +9198,8 @@ snapshots:
   queue-microtask@1.2.3: {}
 
   quick-lru@5.1.1: {}
+
+  random-word-slugs@0.1.7: {}
 
   range-parser@1.2.1: {}
 
