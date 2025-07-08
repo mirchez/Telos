@@ -19,10 +19,14 @@ export function FragmentWeb({ data }: Props) {
     setFragmentKey((prev) => prev + 1);
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(data.sandboxUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(data.sandboxUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error('Failed to copy to clipboard:', error);
+    }
   };
 
   return (
