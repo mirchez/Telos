@@ -32,7 +32,7 @@ export function FragmentWeb({ data }: Props) {
   return (
     <div className="flex flex-col w-full h-full">
       <div className="p-2 border-b bg-sidebar flex items-center gap-x-2">
-        <Hint text="Click to copy" side="bottom">
+        <Hint text="Refresh iframe" side="bottom">
           <Button size="sm" variant="outline" onClick={onRefresh}>
             <RefreshCcwIcon />
           </Button>
