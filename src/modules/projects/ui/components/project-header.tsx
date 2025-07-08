@@ -43,7 +43,7 @@ export const ProjectHeader = ({ projectId }: Props) => {
           <Button
             variant="ghost"
             size="sm"
-            className="focus-visible:ring-0 hover:bg-transparent hover:opacity-75 transition-opacity pl-2!"
+            className="focus-visible:ring-0 hover:bg-transparent hover:opacity-75 transition-opacity pl-2"
           >
             <Image src="/logo.svg" alt="telos-logo" width={18} height={18} />
             <span className="text-sm font-medium">{project.name}</span>
@@ -55,28 +55,25 @@ export const ProjectHeader = ({ projectId }: Props) => {
           <DropdownMenuItem asChild>
             <Link href="/">
               <ChevronLeftIcon />
-              <span>Go Back</span>
+              <span>Go back to home</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
 
           <DropdownMenuSub>
-            <DropdownMenuTrigger className="gap-2">
+            <DropdownMenuSubTrigger className="gap-2">
               <SunMoonIcon className="size-4 text-muted-foreground" />
-              <span>Apperance</span>
-            </DropdownMenuTrigger>
-
+              <span>Appearance</span>
+            </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
                 <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
                   <DropdownMenuRadioItem value="light">
                     <span>Light</span>
                   </DropdownMenuRadioItem>
-
                   <DropdownMenuRadioItem value="dark">
                     <span>Dark</span>
                   </DropdownMenuRadioItem>
-
                   <DropdownMenuRadioItem value="system">
                     <span>System</span>
                   </DropdownMenuRadioItem>
