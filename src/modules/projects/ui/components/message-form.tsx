@@ -18,7 +18,7 @@ interface Props {
 const formSchema = z.object({
   value: z
     .string()
-    .min(1, { message: "Propmt is required" })
+    .min(1, { message: "Prompt is required" })
     .max(1000, { message: "Prompt should be shorter" }),
   projectId: z.string().min(1, { message: "Project id required" }),
 });
