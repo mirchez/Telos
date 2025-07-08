@@ -19,7 +19,7 @@ importers:
         version: 5.1.1(react-hook-form@7.59.0(react@19.1.0))
       '@inngest/agent-kit':
         specifier: ^0.9.0
-        version: 0.9.0(inngest@3.40.0(express@5.1.0)(next@15.3.4(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3))
+        version: 0.9.0(inngest@3.40.1(express@5.1.0)(next@15.3.4(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3))
       '@prisma/client':
         specifier: ^6.10.1
         version: 6.10.1(prisma@6.10.1(typescript@5.8.3))(typescript@5.8.3)
@@ -135,8 +135,8 @@ importers:
         specifier: ^8.6.0
         version: 8.6.0(react@19.1.0)
       inngest:
-        specifier: ^3.40.0
-        version: 3.40.0(express@5.1.0)(next@15.3.4(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3)
+        specifier: ^3.40.1
+        version: 3.40.1(express@5.1.0)(next@15.3.4(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3)
       input-otp:
         specifier: ^1.4.2
         version: 1.4.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -167,6 +167,9 @@ importers:
       react-resizable-panels:
         specifier: ^3.0.3
         version: 3.0.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react-textarea-autosize:
+        specifier: ^8.5.9
+        version: 8.5.9(@types/react@19.1.8)(react@19.1.0)
       recharts:
         specifier: ^3.0.2
         version: 3.0.2(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react-is@16.13.1)(react@19.1.0)(redux@5.0.1)
@@ -238,6 +241,10 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@babel/runtime@7.27.6':
+    resolution: {integrity: sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==}
+    engines: {node: '>=6.9.0'}
 
   '@bufbuild/protobuf@2.6.0':
     resolution: {integrity: sha512-6cuonJVNOIL7lTj5zgo/Rc2bKAo4/GvN+rKCrUj7GdEHRzCk8zKOfFwUsL9nAVk5rSIsRmlgcpLzTRysopEeeg==}
@@ -3362,8 +3369,8 @@ packages:
     resolution: {integrity: sha512-7PnF4oN3CvZF23ADhA5wRaYEQpJ8qygSkbtTXWBeXWXmEVRXK+1ITciHWwHhsjv1TmW0MgacIv6hEi5pX5NQdA==}
     engines: {node: '>=10'}
 
-  inngest@3.40.0:
-    resolution: {integrity: sha512-Eer57BXQjsDCrHC2/xt8usck/0T8CRk/rs+NDpJm1BBHt/Y4jlxXqksWbXInYN1xelFUiA8dxek9U1oEju6LQQ==}
+  inngest@3.40.1:
+    resolution: {integrity: sha512-SC9Ly28i8NI+WymttE8Jk41L9r/wHXWOnlQoy7e7yoQyZI+R2C4S77DpFwzgEaqGT/H8puc1VDli84RoaffXBg==}
     engines: {node: '>=14'}
     peerDependencies:
       '@sveltejs/kit': '>=1.27.3'
@@ -4266,6 +4273,12 @@ packages:
       '@types/react':
         optional: true
 
+  react-textarea-autosize@8.5.9:
+    resolution: {integrity: sha512-U1DGlIQN5AwgjTyOEnI1oCcMuEr1pv1qOtklB2l4nyMGbHzWrI0eFsYK0zos2YWqAolJyG0IWJaqWmWj5ETh0A==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   react@19.1.0:
     resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
     engines: {node: '>=0.10.0'}
@@ -4764,6 +4777,33 @@ packages:
       '@types/react':
         optional: true
 
+  use-composed-ref@1.4.0:
+    resolution: {integrity: sha512-djviaxuOOh7wkj0paeO1Q/4wMZ8Zrnag5H6yBvzN7AKKe8beOaED9SF5/ByLqsku8NP4zQqsvM2u3ew/tJK8/w==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  use-isomorphic-layout-effect@1.2.1:
+    resolution: {integrity: sha512-tpZZ+EX0gaghDAiFR37hj5MgY6ZN55kLiPkJsKxBMZ6GZdOSPJXiOzPM984oPYZ5AnehYx5WQp1+ME8I/P/pRA==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  use-latest@1.3.0:
+    resolution: {integrity: sha512-mhg3xdm9NaM8q+gLT8KryJPnRFOz1/5XPBhmDEVZK1webPzDjrPk7f/mbpeLqTgB9msytYWANxgALOCJKnLvcQ==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
   use-sidecar@1.1.3:
     resolution: {integrity: sha512-Fedw0aZvkhynoPYlA5WXrMCAMm+nSWdZt6lzJQ7Ok8S6Q+VsHmHpRWndVRJ8Be0ZbkfPc5LRYH+5XrzXcEeLRQ==}
     engines: {node: '>=10'}
@@ -4924,6 +4964,8 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@babel/runtime@7.27.6': {}
 
   '@bufbuild/protobuf@2.6.0': {}
 
@@ -5233,14 +5275,14 @@ snapshots:
   '@img/sharp-win32-x64@0.34.2':
     optional: true
 
-  '@inngest/agent-kit@0.9.0(inngest@3.40.0(express@5.1.0)(next@15.3.4(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3))':
+  '@inngest/agent-kit@0.9.0(inngest@3.40.1(express@5.1.0)(next@15.3.4(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3))':
     dependencies:
       '@dmitryrechkin/json-schema-to-zod': 1.0.1
       '@inngest/ai': 0.1.2
       '@modelcontextprotocol/sdk': 1.13.3
       eventsource: 3.0.7
       express: 4.21.2
-      inngest: 3.40.0(express@5.1.0)(next@15.3.4(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3)
+      inngest: 3.40.1(express@5.1.0)(next@15.3.4(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3)
       xxhashjs: 0.2.2
       zod: 3.25.67
       zod-to-json-schema: 3.24.6(zod@3.25.67)
@@ -8463,7 +8505,7 @@ snapshots:
 
   ini@2.0.0: {}
 
-  inngest@3.40.0(express@5.1.0)(next@15.3.4(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3):
+  inngest@3.40.1(express@5.1.0)(next@15.3.4(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3):
     dependencies:
       '@bufbuild/protobuf': 2.6.0
       '@inngest/ai': 0.1.5
@@ -9283,6 +9325,15 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.1.8
 
+  react-textarea-autosize@8.5.9(@types/react@19.1.8)(react@19.1.0):
+    dependencies:
+      '@babel/runtime': 7.27.6
+      react: 19.1.0
+      use-composed-ref: 1.4.0(@types/react@19.1.8)(react@19.1.0)
+      use-latest: 1.3.0(@types/react@19.1.8)(react@19.1.0)
+    transitivePeerDependencies:
+      - '@types/react'
+
   react@19.1.0: {}
 
   readable-stream@3.6.2:
@@ -9922,6 +9973,25 @@ snapshots:
     dependencies:
       react: 19.1.0
       tslib: 2.8.1
+    optionalDependencies:
+      '@types/react': 19.1.8
+
+  use-composed-ref@1.4.0(@types/react@19.1.8)(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+    optionalDependencies:
+      '@types/react': 19.1.8
+
+  use-isomorphic-layout-effect@1.2.1(@types/react@19.1.8)(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+    optionalDependencies:
+      '@types/react': 19.1.8
+
+  use-latest@1.3.0(@types/react@19.1.8)(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+      use-isomorphic-layout-effect: 1.2.1(@types/react@19.1.8)(react@19.1.0)
     optionalDependencies:
       '@types/react': 19.1.8
 
