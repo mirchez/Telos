@@ -21,32 +21,45 @@ const MessagesContainer = ({
 }: Props) => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const trpc = useTRPC();
-  const { data: messages } = useSuspenseQuery(
+  // Manejo de loading y error
+  const {
+    data: messages = [],
+    isLoading,
+    isError,
+    error,
+  } = useSuspenseQuery(
     trpc.messages.getMany.queryOptions(
+      { projectId },
       {
-        projectId: projectId,
-      },
-      //TODO: temporary live message update
-      { refetchInterval: 5000 }
+        refetchInterval: 5000,
+      }
     )
   );
-
-  // useEffect(() => {
-  //   const lastAssistantMessageWithFragment = messages.findLast(
-  //     (message) => message.role === "ASSISTANT" && !!message.fragment
-  //   );
-
-  //   if (lastAssistantMessageWithFragment) {
-  //     setActiveFragment(lastAssistantMessageWithFragment.fragment);
-  //   }
-  // }, [messages, setActiveFragment]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView();
   }, [messages.length]);
 
   const lastMessage = messages[messages.length - 1];
-  const isLastMessageUser = lastMessage.role === "USER";
+  const isLastMessageAssistant = lastMessage?.role === "USER";
+
+  // Estado optimista sugerido (no implementado):
+  // Podrías mantener un estado local de mensajes enviados y agregarlos a la lista hasta que el backend los confirme.
+
+  if (isLoading) {
+    return (
+      <div className="flex-1 flex items-center justify-center">
+        Loading messages...
+      </div>
+    );
+  }
+  if (isError) {
+    return (
+      <div className="flex-1 flex items-center justify-center text-red-500">
+        {error?.message || "Error loading messages"}
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col flex-1 min-h-0">
@@ -61,16 +74,20 @@ const MessagesContainer = ({
               createdAt={message.createdAt}
               isActiveFragment={activeFragment?.id === message.fragment?.id}
               type={message.type}
-              onFragmentClick={() => {}}
+              onFragmentClick={setActiveFragment}
             />
           ))}
-          {isLastMessageUser && <MessageLoading />}
+          {isLastMessageAssistant && <MessageLoading />}
           <div ref={bottomRef} />
         </div>
       </div>
 
       <div className="relative p-3 pt-1">
         <div className="absolute -top-6 left-0 right-0 h-6 bg-gradient-to-b from-transparent to-background/90 pointer-events-none" />
+        {/*
+          Para asegurar la invalidación correcta de la query, asegúrate de que el objeto { projectId } sea exactamente igual en MessageForm y aquí.
+          Si usas trpc.messages.getMany.queryOptions({ projectId }) en ambos, la key será igual.
+        */}
         <MessageForm projectId={projectId} />
       </div>
     </div>

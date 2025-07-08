@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Fragment, MessageRole, MessageType } from "@/generated/prisma";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 import { ChevronRightIcon, Code2Icon } from "lucide-react";
 import Image from "next/image";
 
@@ -68,7 +69,7 @@ const AssistantMessage = ({
         type === "ERROR" && "text-red-700 dark:text-red-500"
       )}
     >
-      <div className="flex items-center justify-center gap-2 pl-2 mb-2">
+      <div className="flex items-center gap-2 pl-2 mb-2">
         <Image
           src="/logo.svg"
           alt="telos-logo"
@@ -78,7 +79,7 @@ const AssistantMessage = ({
         />
         <span className="text-sm font-medium">Telos</span>
         <span className="text-xs text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
-          {format(createdAt, "HH:mm 'on' MMM dd, yyyy")}
+          {format(toZonedTime(createdAt, "UTC"), "HH:mm 'on' MMM dd, yyyy")}
         </span>
       </div>
       <div className="pl-8.5 flex flex-col gap-y-4">
