@@ -78,7 +78,7 @@ const AssistantMessage = ({
         />
         <span className="text-sm font-medium">Telos</span>
         <span className="text-xs text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
-          {format(createdAt, "HH:mm 'on' MMM dd, yyy")}
+          {format(createdAt, "HH:mm 'on' MMM dd, yyyy")}
         </span>
       </div>
       <div className="pl-8.5 flex flex-col gap-y-4">
