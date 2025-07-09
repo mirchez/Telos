@@ -21,7 +21,9 @@ const MessagesContainer = ({
 }: Props) => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const trpc = useTRPC();
-  // Manejo de loading y error
+
+  const lastAssistantMessageIdRef = useRef<string | null>(null);
+
   const {
     data: messages = [],
     isLoading,
@@ -37,14 +39,25 @@ const MessagesContainer = ({
   );
 
   useEffect(() => {
+    const lastAssistantMessage = messages.findLast(
+      (message) => message.role === "ASSISTANT"
+    );
+
+    if (
+      lastAssistantMessage?.fragment &&
+      lastAssistantMessage.id !== lastAssistantMessageIdRef.current
+    ) {
+      setActiveFragment(lastAssistantMessage.fragment);
+      lastAssistantMessageIdRef.current = lastAssistantMessage.id;
+    }
+  }, [messages, setActiveFragment]);
+
+  useEffect(() => {
     bottomRef.current?.scrollIntoView();
   }, [messages.length]);
 
   const lastMessage = messages[messages.length - 1];
   const isLastMessageAssistant = lastMessage?.role === "USER";
-
-  // Estado optimista sugerido (no implementado):
-  // Podrías mantener un estado local de mensajes enviados y agregarlos a la lista hasta que el backend los confirme.
 
   if (isLoading) {
     return (
