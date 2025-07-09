@@ -1,3 +1,5 @@
+"use client";
+
 import { CopyCheckIcon, CopyIcon, Key } from "lucide-react";
 import { useState, useMemo, useCallback, Fragment } from "react";
 import { Hint } from "@/components/hint";
@@ -93,6 +95,7 @@ interface FileExplorerProps {
 }
 
 export const FileExplorer = ({ files }: FileExplorerProps) => {
+  const [copied, setCopied] = useState(false);
   const [selectedFile, setSelectedFile] = useState<string | null>(() => {
     const filesKey = Object.keys(files);
     return filesKey.length > 0 ? filesKey[0] : null;
@@ -110,6 +113,16 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
     },
     [files]
   );
+
+  const handleCopy = useCallback(() => {
+    if (selectedFile) {
+      navigator.clipboard.writeText(files[selectedFile]);
+      setCopied(true);
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    }
+  }, [selectedFile, files]);
 
   return (
     <ResizablePanelGroup direction="horizontal">
@@ -133,10 +146,10 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
                   variant="outline"
                   size="icon"
                   className="ml-auto"
-                  onClick={() => {}}
-                  disabled={false}
+                  onClick={handleCopy}
+                  disabled={copied}
                 >
-                  <CopyIcon />
+                  {copied ? <CopyCheckIcon /> : <CopyIcon />}
                 </Button>
               </Hint>
             </div>
