@@ -116,11 +116,20 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
 
   const handleCopy = useCallback(() => {
     if (selectedFile) {
-      navigator.clipboard.writeText(files[selectedFile]);
-      setCopied(true);
-      setTimeout(() => {
-        setCopied(false);
-      }, 2000);
+      navigator.clipboard
+        .writeText(files[selectedFile])
+        .then(() => {
+          setCopied(true);
+          setTimeout(() => {
+            setCopied(false);
+          }, 2000);
+        })
+        .catch((error) => {
+          alert(
+            "No se pudo copiar automáticamente. Selecciona y copia manualmente."
+          );
+          console.error("Failed to copy to clipboard:", error);
+        });
     }
   }, [selectedFile, files]);
 
@@ -134,7 +143,10 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
         />
       </ResizablePanel>
 
-      <ResizableHandle className="hover:bg-primary transition-colors" />
+      <ResizableHandle
+        className="hover:bg-primary transition-colors"
+        withHandle
+      />
 
       <ResizablePanel defaultSize={70} minSize={50} className="bg-sidebar">
         {selectedFile && files[selectedFile] ? (
