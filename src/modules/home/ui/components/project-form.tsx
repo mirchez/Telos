@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { FormField, Form } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
 import { PROJECT_TEMPLATES } from "@/app/(home)/constants";
+import { useClerk } from "@clerk/nextjs";
 
 const formSchema = z.object({
   value: z
@@ -23,6 +24,7 @@ const formSchema = z.object({
 });
 
 const ProjectForm = () => {
+  const clerk = useClerk();
   const router = useRouter();
   const trpc = useTRPC();
   const queryClient = useQueryClient();
@@ -44,8 +46,11 @@ const ProjectForm = () => {
         router.push(`/projects/${data.id}`);
       },
       onError: (e) => {
-        //TODO: redirect to pricing page if user run out of tokens
         toast.error(e.message);
+
+        if (e.data?.code === "UNAUTHORIZED") {
+          clerk.openSignIn();
+        }
       },
     })
   );
