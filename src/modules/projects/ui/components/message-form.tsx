@@ -77,6 +77,7 @@ const MessageForm = ({ projectId }: Props) => {
           showUsage && "rounded-t-none"
         )}
       >
+        <div className="absolute inset-0 -z-10 h-full w-full bg-white dark:bg-[#18181b] bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#232329_1px,transparent_1px)] [background-size:16px_16px]" />
         <FormField
           control={form.control}
           name="value"
