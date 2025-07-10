@@ -25,7 +25,10 @@ export function FragmentWeb({ data }: Props) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
-      console.error('Failed to copy to clipboard:', error);
+      alert(
+        "Could not copy automatically. Please select and copy manually."
+      );
+      console.error("Failed to copy to clipboard:", error);
     }
   };
 
