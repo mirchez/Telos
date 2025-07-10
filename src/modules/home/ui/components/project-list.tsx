@@ -32,11 +32,13 @@ import {
 import { useSortable } from "@dnd-kit/sortable";
 
 import { CSS } from "@dnd-kit/utilities";
+import { useUser } from "@clerk/nextjs";
 
 // Tipos
 type Project = {
   id: string;
   name: string;
+  userId: string;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -141,9 +143,21 @@ const ProjectCard = ({
   );
 };
 
+// Helper to get ordered projects safely
+function getOrderedProjects(
+  projects: Project[] | undefined,
+  order: string[]
+): Project[] {
+  if (!projects) return [];
+  if (!order.length) return projects;
+  const map = new Map(projects.map((p) => [p.id, p]));
+  return order.map((id) => map.get(id)).filter((p): p is Project => !!p);
+}
+
 // Componente principal
 export const ProjectList = () => {
   const trpc = useTRPC();
+  const { user } = useUser();
   const { data: projects } = useQuery(trpc.projects.getMany.queryOptions());
 
   const [projectOrder, setProjectOrder] = useState<string[]>([]);
@@ -161,18 +175,10 @@ export const ProjectList = () => {
     })
   );
 
-  // Memoización del orden de proyectos
-  const orderedProjects = useMemo(() => {
-    if (!projects?.length) return [];
-
-    if (projectOrder.length === 0) {
-      return projects;
-    }
-
-    return projectOrder
-      .map((id) => projects.find((p) => p.id === id))
-      .filter((p): p is Project => p !== undefined);
-  }, [projects, projectOrder]);
+  const orderedProjects = useMemo(
+    () => getOrderedProjects(projects, projectOrder),
+    [projects, projectOrder]
+  );
 
   // Proyecto activo para el drag overlay
   const activeProject = useMemo(() => {
@@ -213,9 +219,11 @@ export const ProjectList = () => {
     setActiveId(null);
   }, []);
 
-  return (
+  return !user ? null : (
     <div className="w-full bg-white dark:bg-sidebar rounded-xl p-8 border flex flex-col gap-y-6 sm:gap-y-4">
-      <h2 className="text-2xl font-semibold">Old Vibes</h2>
+      <h2 className="text-2xl font-semibold">
+        {user?.firstName}&apos;s Projects
+      </h2>
 
       <DndContext
         sensors={sensors}
