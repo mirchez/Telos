@@ -9,7 +9,27 @@ import Link from "next/link";
 
 export const ProjectList = () => {
   const trpc = useTRPC();
-  const { data: projects } = useQuery(trpc.projects.getMany.queryOptions());
+- const { data: projects } = useQuery(trpc.projects.getMany.queryOptions());
++ const { data: projects, isLoading, error } = useQuery(trpc.projects.getMany.queryOptions());
+
++ if (isLoading) {
++   return (
++     <div className="w-full bg-white dark:bg-sidebar rounded-xl p-8 border flex justify-center">
++       <p className="text-sm text-muted-foreground">Loading projects...</p>
++     </div>
++   );
++ }
+
++ if (error) {
++   return (
++     <div className="w-full bg-white dark:bg-sidebar rounded-xl p-8 border flex justify-center">
++       <p className="text-sm text-destructive">Failed to load projects</p>
++     </div>
++   );
++ }
+
+  // ...rest of the component rendering logic
+};
 
   return (
     <div className="w-full bg-white dark:bg-sidebar rounded-xl p-8 border flex flex-col gap-y-6 sm:gap-y-4">
