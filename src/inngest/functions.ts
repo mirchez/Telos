@@ -25,6 +25,8 @@ export const codeAgentFunction = inngest.createFunction(
   async ({ event, step }) => {
     const sandboxId: string = await step.run("get-sandbox-id", async () => {
       const sandbox = await Sandbox.create("telos-nextjs-test-1");
+      await sandbox.setTimeout(40_000 * 10 * 3);
+
       return sandbox.sandboxId;
     });
 
@@ -40,6 +42,7 @@ export const codeAgentFunction = inngest.createFunction(
           orderBy: {
             createdAt: "desc",
           },
+          take: 5,
         });
 
         for (const message of messages) {
@@ -49,7 +52,7 @@ export const codeAgentFunction = inngest.createFunction(
             content: message.content,
           });
         }
-        return formattedMessages;
+        return formattedMessages.reverse();
       }
     );
 
