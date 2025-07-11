@@ -234,7 +234,7 @@ export const codeAgentFunction = inngest.createFunction(
       }
     };
 
-    const generateRespose = (): string => {
+    const generateResponse = (): string => {
       if (responseOutput[0].type !== "text") {
         return "Here you go";
       }
