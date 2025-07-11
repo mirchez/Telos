@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
@@ -35,6 +36,17 @@ export const ProjectHeader = ({ projectId }: Props) => {
   );
 
   const { theme, setTheme } = useTheme();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
 
   return (
     <header className="p-2 flex justify-between items-center border-b">
@@ -42,40 +54,69 @@ export const ProjectHeader = ({ projectId }: Props) => {
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
-            size="sm"
+            size={isMobile ? "sm" : "sm"}
             className="focus-visible:ring-0 hover:bg-transparent hover:opacity-75 transition-opacity pl-2"
           >
-            <Image src="/logo.svg" alt="telos-logo" width={18} height={18} />
-            <span className="text-sm font-medium">{project.name}</span>
-            <ChevronDownIcon />
+            <Image
+              src="/logo.svg"
+              alt="telos-logo"
+              width={isMobile ? 16 : 18}
+              height={isMobile ? 16 : 18}
+            />
+            <span
+              className={`font-medium ${
+                isMobile ? "text-xs" : "text-sm"
+              } max-w-[150px] truncate`}
+            >
+              {project.name}
+            </span>
+            <ChevronDownIcon className={isMobile ? "w-3 h-3" : "w-4 h-4"} />
           </Button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent side="bottom" align="start">
+        <DropdownMenuContent
+          side="bottom"
+          align="start"
+          className={isMobile ? "w-56" : ""}
+        >
           <DropdownMenuItem asChild>
             <Link href="/">
-              <ChevronLeftIcon />
-              <span>Go back to home</span>
+              <ChevronLeftIcon className={isMobile ? "w-3 h-3" : "w-4 h-4"} />
+              <span className={isMobile ? "text-xs" : "text-sm"}>
+                Go back to home
+              </span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
 
           <DropdownMenuSub>
             <DropdownMenuSubTrigger className="gap-2">
-              <SunMoonIcon className="size-4 text-muted-foreground" />
-              <span>Appearance</span>
+              <SunMoonIcon
+                className={`text-muted-foreground ${
+                  isMobile ? "w-3 h-3" : "w-4 h-4"
+                }`}
+              />
+              <span className={isMobile ? "text-xs" : "text-sm"}>
+                Appearance
+              </span>
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
                 <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
                   <DropdownMenuRadioItem value="light">
-                    <span>Light</span>
+                    <span className={isMobile ? "text-xs" : "text-sm"}>
+                      Light
+                    </span>
                   </DropdownMenuRadioItem>
                   <DropdownMenuRadioItem value="dark">
-                    <span>Dark</span>
+                    <span className={isMobile ? "text-xs" : "text-sm"}>
+                      Dark
+                    </span>
                   </DropdownMenuRadioItem>
                   <DropdownMenuRadioItem value="system">
-                    <span>System</span>
+                    <span className={isMobile ? "text-xs" : "text-sm"}>
+                      System
+                    </span>
                   </DropdownMenuRadioItem>
                 </DropdownMenuRadioGroup>
               </DropdownMenuSubContent>
