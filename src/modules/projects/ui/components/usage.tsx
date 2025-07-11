@@ -13,7 +13,7 @@ interface Props {
 
 export const Usage = ({ points, msBeforeNext }: Props) => {
   const { has } = useAuth();
-  const hasPremiumAccess = has?.({ plan: "pro" });
+  const hasPremiumAccess = has?.({ plan: "pro" }) ?? false;
 
   return (
     <div className="rounded-t-xl bg-background border border-b-0 p-2.5">
