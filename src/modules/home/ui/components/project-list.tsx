@@ -91,7 +91,7 @@ const SortableProjectItem = ({
 // Componente de la tarjeta del proyecto
 interface ProjectCardProps {
   project: Project;
-  dragHandleProps?: any;
+  dragHandleProps?: unknown;
   isDragOverlay?: boolean;
 }
 
@@ -114,7 +114,7 @@ const ProjectCard = ({
         <div className="flex items-center gap-x-4 w-full">
           <div className="flex items-center gap-x-2">
             <div
-              {...dragHandleProps}
+              {...(dragHandleProps || {})}
               className="cursor-grab active:cursor-grabbing p-1 -m-1 touch-none"
               onClick={(e) => e.preventDefault()}
             >

@@ -51,7 +51,7 @@ export function convertFilestoTreeItems(files: {
         const subTree = convertNode(value, key);
         if (Array.isArray(subTree)) {
           children.push([key, ...subTree]);
-        } else [children.push([key, subTree])];
+        } else children.push([key, subTree]);
       }
     }
 
