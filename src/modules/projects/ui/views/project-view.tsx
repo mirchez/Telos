@@ -10,7 +10,13 @@ import { Fragment } from "@/generated/prisma";
 import { ProjectHeader } from "../components/project-header";
 import { FragmentWeb } from "../components/fragment-web";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CodeIcon, CrownIcon, EyeIcon, MessageSquareIcon, MonitorIcon } from "lucide-react";
+import {
+  CodeIcon,
+  CrownIcon,
+  EyeIcon,
+  MessageSquareIcon,
+  MonitorIcon,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FileExplorer } from "@/components/file-explorer";
@@ -49,7 +55,7 @@ const ProjectView = ({ projectId }: Props) => {
           <Suspense fallback={<p>Loading project...</p>}>
             <ProjectHeader projectId={projectId} />
           </Suspense>
-          
+
           {/* Navegación móvil */}
           <div className="flex border-t">
             <button
@@ -92,7 +98,9 @@ const ProjectView = ({ projectId }: Props) => {
               className="h-full"
               defaultValue="preview"
               value={tabState}
-              onValueChange={(value) => setTabState(value as "preview" | "code")}
+              onValueChange={(value) =>
+                setTabState(value as "preview" | "code")
+              }
             >
               <div className="w-full flex items-center p-2 border-b gap-x-2">
                 <TabsList className="h-8 p-0 border rounded-md">
@@ -107,7 +115,12 @@ const ProjectView = ({ projectId }: Props) => {
                 </TabsList>
                 <div className="ml-auto flex items-center gap-x-1">
                   {!hasPremiumAccess && (
-                    <Button asChild size="sm" variant="default" className="text-xs">
+                    <Button
+                      asChild
+                      size="sm"
+                      variant="default"
+                      className="text-xs"
+                    >
                       <Link href="/pricing">
                         <CrownIcon className="w-3 h-3" />
                         Upgrade
