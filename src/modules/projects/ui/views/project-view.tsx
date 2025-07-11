@@ -84,15 +84,17 @@ const ProjectView = ({ projectId }: Props) => {
         </div>
 
         {/* Contenido móvil */}
-        <div className="flex-1 min-h-0">
+        <div className="flex-1 min-h-0 flex flex-col">
           {mobileView === "chat" ? (
-            <Suspense fallback={<p>Loading...</p>}>
-              <MessagesContainer
-                projectId={projectId}
-                activeFragment={activeFragment}
-                setActiveFragment={setActiveFragment}
-              />
-            </Suspense>
+            <div className="flex-1 min-h-0 flex flex-col">
+              <Suspense fallback={<p>Loading...</p>}>
+                <MessagesContainer
+                  projectId={projectId}
+                  activeFragment={activeFragment}
+                  setActiveFragment={setActiveFragment}
+                />
+              </Suspense>
+            </div>
           ) : (
             <Tabs
               className="h-full"
