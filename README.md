@@ -1,8 +1,5 @@
----
 
-# Telos (English)
-
-[![Deploy on Vercel](https://vercel.com/button)](https://telos-steel.vercel.app/)
+# Telos
 
 Telos is an AI-powered platform that allows you to quickly and easily create applications and websites. With Telos, you can generate complete projects like Netflix clones, Kanban boards, admin dashboards, and much more, all with just a few clicks and simple commands.
 
